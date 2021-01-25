@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calc</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <form id="calc-form">
+                    <div class="form-group mb-2">
+                        <label>Client Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Amount in figures</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Total Intrest</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Total Amount</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Date of Disbursment</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Date of Last Repayment</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Period for Repayment</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label>Repayment</label>
+                        <input type="number" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Calculate Loan</button>
+                </form>
+            </div>
+            <table id="tab" class="table table-bordered mt-5 showing">
+                
+              </table>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
