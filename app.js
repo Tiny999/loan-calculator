@@ -17,17 +17,21 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>Jacob</td>
                 <td>Thornton</td>
                 <td>@fat</td>
+                <td></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
+                <td>Larry the Bird</td>
+                <td>Larry the Bird</td>
+                <td>Bird</td>
+                <td></td>
             </tr>
         </tbody>
     `;
