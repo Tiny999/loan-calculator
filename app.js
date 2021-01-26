@@ -1,5 +1,4 @@
-// const { jsPDF } = window.jspdf;
-// window.html2canvas = html2canvas;
+const { jsPDF } = window.jspdf;
 
 document.querySelector('#calc-form').addEventListener('submit', function(e){
     e.preventDefault();
@@ -99,20 +98,17 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
 })
 
 $('#pdf').click(function(){
-    const table = $('#tab').html()
+    // const table = $('#tab').html()
 
-    var doc = new jsPDF();
+    var doc = new jsPDF('p', 'pt', 'a4');
 
-    var specialElementHandlers = {
-        '#editor': function (element, renderer) {
-            return true;
-        }
-    };
-
-    doc.fromHTML(table, 15, 15, {
-        'width': 170,
-            'elementHandlers': specialElementHandlers
+    doc.html(document.querySelector('#tab'), {
+      callback: function (doc) {
+        doc.save('loan-details.pdf');
+      },
+      margin: [60, 60, 60, 60],
+      x: 32,
+      y: 32,
     });
-    doc.save('loan-details.pdf')
 })
 
