@@ -7,17 +7,27 @@
     <link rel="stylesheet" href="./bootstrap.min.css">
 
     <style>
-        body{
-            font-size: 14px;
+
+        #tab{
+            display: none;
         }
 
         .table{
-            border-color: black;
+            border: 1px solid #333;
         }
 
-        #pdf{
-            display: none;
+        .table tfoot{
+            text-align: right;
         }
+        
+        @media print {
+        #calc-form,
+        #pdf {
+          display: none;
+        }
+
+        /* @page { size: auto;  margin: 0mm; } */
+      }
     </style>
 
 </head>
@@ -28,45 +38,51 @@
                 <form id="calc-form">
                     <div class="form-group mb-2">
                         <label>Client Name</label>
-                        <input type="text" class="form-control">
+                        <input id="clientName" type="text" class="form-control">
                     </div>
                     <div class="form-group mb-2">
-                        <label>Amount in figures</label>
-                        <input type="number" class="form-control">
+                        <label>Amount</label>
+                        <input id="amount" type="number" step="0.01" class="form-control">
                     </div>
                     <div class="form-group mb-2">
                         <label>Total Intrest</label>
-                        <input type="number" class="form-control">
-                    </div>
-                    <div class="form-group mb-2">
-                        <label>Total Amount</label>
-                        <input type="number" class="form-control">
+                        <input id="interest" type="number" step="0.01" class="form-control">
                     </div>
                     <div class="form-group mb-2">
                         <label>Date of Disbursment</label>
-                        <input type="date" class="form-control">
+                        <input id="dateDisburse" type="date" class="form-control">
                     </div>
                     <div class="form-group mb-2">
                         <label>Date of Last Repayment</label>
-                        <input type="date" class="form-control">
+                        <input id="lastRepay" type="date" class="form-control">
                     </div>
                     <div class="form-group mb-2">
                         <label>Period for Repayment</label>
-                        <input type="number" class="form-control">
+                        <input id="periodRepay" type="number" step="0.01" class="form-control">
                     </div>
                     <div class="form-group mb-2">
                         <label>Repayment</label>
-                        <input type="number" class="form-control">
+                        <input id="repayment" type="number" step="0.01" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Calculate Loan</button>
                 </form>
             </div>
             <div class="col-md-6"></div>
-            <table id="tab" style="width: 500px;" class="table table-bordered mt-5 showing">
-
-            </table>
-            <div class="mt-4">
-                <button id='pdf' class="btn btn-primary">Download PDF</button>
+            <div id="tab">
+                <div class="text-center my-3">
+                    <h6>MICRO INVESTMENT SUPPORT SERVICES DUGBE DR</h6>
+                    <h6>AGREED REPAYMENT SCHEDULE FORM</h6>
+                </div>
+                <div class="mb-3">
+                    <p>Acct Name: Micro Investment Support Services</p>
+                    <p>Acct Nos: 1122343422</p>
+                    <p>Bank: Zenith Bank</p>
+                </div>
+                <table class="table table-bordered">
+                </table>
+            </div>
+            <div id="pdf" class="mt-2">
+                
             </div>
         </div>
     </div>
