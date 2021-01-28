@@ -158,7 +158,7 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="6">*All rights reserved.</td>
+            <td colspan="6">&copy; Capital Edge.</td>
           </tr>
         </tfoot>
     `;
