@@ -59,6 +59,27 @@ Date.prototype.formatMMDDYYYY = function(){
     "/" +  this.getFullYear();
 }
 
+
+function clearfields(){
+    document.querySelector('#clientName').value = '';
+    document.querySelector('#periodRepay').value = '';
+    document.querySelector('#amount').value = '';
+    document.querySelector('#interest').value = '';
+    document.querySelector('#dateDisburse').value = '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.querySelector('#calc-form').addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -80,6 +101,7 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
     if(clientName === '' || document.querySelector('#amount').value === '' || document.querySelector('#interest').value === '' || document.querySelector('#dateDisburse').value === '' || periodRepay === ''){
 
         alert('Please Fill In All Fields');
+        clearfields();
 
     } else{
 
@@ -170,8 +192,8 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
 
     } 
 
-
-
+    // Clear fields
+    clearfields();
 
 
     // Show Button
