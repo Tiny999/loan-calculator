@@ -1,33 +1,33 @@
-var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
-var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
-
-function inWords (num) {
-    if ((num = num.toString()).length > 9) return 'overflow';
-    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-    if (!n) return; var str = '';
-    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
-    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
-    return str;
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
 }
-
 
 document.querySelector('#calc-form').addEventListener('submit', function(e){
     e.preventDefault();
-    $('#tab').show();
 
     const clientName = document.querySelector('#clientName').value;
     const loanAmount = parseFloat(document.querySelector('#amount').value);
     const interest = parseFloat(document.querySelector('#interest').value);
     const totalAmount = loanAmount + interest;
-    const dateDisburse = document.querySelector('#dateDisburse').value;
+    const dateDisburse = new Date(document.querySelector('#dateDisburse').value);
     const periodRepay = document.querySelector('#periodRepay').value;
 
-    // console.log(dateDisburse)
+    const periodInDays = parseInt(periodRepay) * 7;
+    const lastRepay = dateDisburse.addDays(periodInDays);
 
-    document.querySelector('#tab table').innerHTML = `
+    const repayment = totalAmount / parseInt(periodRepay);
+
+    if(clientName === '' || document.querySelector('#amount').value === '' || document.querySelector('#interest').value === '' || document.querySelector('#dateDisburse').value === '' || periodRepay === ''){
+
+        alert('Please Fill In All Fields');
+
+    } else{
+
+        $('#tab').show();
+
+        document.querySelector('#tab table').innerHTML = `
         <tbody>
             <tr>
                 <th colspan="2">Client Name:</th>
@@ -50,11 +50,11 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
             </tr>
             <tr>
                 <th colspan="2">Date of Disbursment</th>
-                <th colspan="4">${dateDisburse}</th>
+                <th colspan="4">${dateDisburse.toDateString()}</th>
             </tr>
             <tr>
                 <th colspan="2">Date of Last Repayment</th>
-                <th colspan="4">08 December 2020</th>
+                <th colspan="4">${lastRepay.toDateString()}</th>
             </tr>
             <tr>
                 <th colspan="2">Period For Repayment</th>
@@ -62,7 +62,7 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
             </tr>
             <tr>
                 <th colspan="2">Repayment</th>
-                <th colspan="4">18,500.00</th>
+                <th colspan="4">${repayment.toLocaleString(undefined, {'minimumFractionDigits':2, 'maximumFractionDigits':2})}</th>
             </tr>
             <tr>
                 <th colspan='6' class='text-center'>LEASE REPAYMENT SCHEDULE</th>
@@ -75,294 +75,6 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
                 <th scope="col" style="height: 55px; padding: 5px; vertical-align: bottom;">TOTAL</th>
                 <th scope="col" style="height: 55px; padding: 5px; vertical-align: bottom;">Issuer Sign</th>
             </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>29/06/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>06/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>13/07/20</td>
-                <td>12,819.22</td>
-                <td>5,470.78</td>
-                <td>18,500.00</td>
-                <td></td
-            </tr>
         </tbody>
         <tfoot>
           <tr>
@@ -371,13 +83,47 @@ document.querySelector('#calc-form').addEventListener('submit', function(e){
         </tfoot>
     `;
 
+    // let currentDate = new Date(document.querySelector('#dateDisburse').value);
+
+    for( let i = 1; i <= parseInt(periodRepay); i++ ){
+        const amount = loanAmount / parseInt(periodRepay);
+        const int = interest / parseInt(periodRepay);
+        const total = int + amount;
+        
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <th scope="row">${i}</th>
+            <td>29/06/20</td>
+            <td>${amount.toLocaleString(undefined, {'minimumFractionDigits':2, 'maximumFractionDigits':2})}</td>
+            <td>${int.toLocaleString(undefined, {'minimumFractionDigits':2, 'maximumFractionDigits':2})}</td>
+            <td>${total.toLocaleString(undefined, {'minimumFractionDigits':2, 'maximumFractionDigits':2})}</td>
+            <td></td>
+        `;
+
+        document.querySelector('#tab table tbody').appendChild(tr);
+
+    } 
+
+
+
+
+
+    // Show Button
     document.querySelector('#pdf').innerHTML = `
         <button class="btn btn-primary">Save PDF</button>
     `
+    }
+
 });
 
-$('#pdf').on('click', 'button', function(){
 
+
+
+
+//Print on click
+$('#pdf').on('click', 'button', function(){
     window.print();
 });
 
